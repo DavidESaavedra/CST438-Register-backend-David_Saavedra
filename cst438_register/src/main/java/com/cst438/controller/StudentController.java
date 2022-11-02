@@ -4,6 +4,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,6 +17,7 @@ import com.cst438.domain.StudentRepository;
 import com.cst438.domain.StudentDTO;
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:3000"})
 public class StudentController {
 	@Autowired
 	StudentRepository studentRepository;
@@ -29,6 +31,7 @@ public class StudentController {
 			Student student = new Student();
 			student.setName(studentDTO.name);
 			student.setEmail(studentDTO.email);
+			student.setStatusCode(studentDTO.statusCode);
 			Student saveStudent = studentRepository.save(student);
 			return saveStudent;
 		}else{
